@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standoff 2: Gold Generator</title>
+    <style>
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; overflow: hidden; margin: 0; }
+        .container { padding: 50px; }
+        h1 { color: #ff9900; }
+        input { padding: 10px; border-radius: 5px; border: none; margin: 10px; width: 80%; max-width: 300px; }
+        button { background: #ff9900; color: white; border: none; padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        
+        /* Стили для троллинг-экрана */
+        #prank-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: #0f0; font-family: monospace; text-align: left; padding: 20px; box-sizing: border-box; z-index: 9999; overflow-y: hidden; }
+        .glitch { animation: flash 0.1s infinite; }
+        @keyframes flash { 0% { background: black; } 50% { background: #400; } 100% { background: black; } }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-ui">
+        <h1>Standoff 2 Gold Generator</h1>
+        <p>Введите ваш ID для зачисления 5000 голды:</p>
+        <input type="text" placeholder="Ваш ID (например, 12345678)"><br>
+        <button onclick="startPrank()">ПОЛУЧИТЬ ГОЛДУ</button>
+    </div>
+
+    <div id="prank-screen">
+        <div id="log"></div>
+    </div>
+
+    <script>
+        function startPrank() {
+            // Включаем вибрацию (работает на Android в Chrome)
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 200, 500, 200, 1000]);
+            }
+
+            // Прячем интерфейс и показываем "взлом"
+            document.getElementById('main-ui').style.display = 'none';
+            const screen = document.getElementById('prank-screen');
+            screen.style.display = 'block';
+            screen.classList.add('glitch');
+
+            const logs = [
+                "Connecting to Standoff 2 Servers...",
+                "Bypassing Anti-Cheat...",
+                "ERROR: SYSTEM BREACH DETECTED!",
+                "Infecting C:/Windows/System32...",
+                "Deleting Photo Gallery...",
+                "Sending private data to remote server...",
+                "Formatting Internal Storage...",
+                "Deleting Android OS...",
+                "GOODBYE!"
+            ];
+
+            let i = 0;
+            const logDiv = document.getElementById('log');
+            
+            const interval = setInterval(() => {
+                if (i < logs.length) {
+                    logDiv.innerHTML += "> " + logs[i] + "<br>";
+                    i++;
+                    if (navigator.vibrate) navigator.vibrate(200);
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        alert("Твой телефон взломан! Шутка :)");
+                        location.reload(); // Перезагрузка страницы, чтобы всё вернулось в норму
+                    }, 2000);
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>
